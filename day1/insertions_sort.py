@@ -15,7 +15,13 @@ def insertion_sort(arr):
         arr[j + 1] = key
 
     return arr
-        
+  
+def insertion_sort_recursive(arr, pos):
+    pass   
+
+
+
+
 
 def insertion_sort_descending(arr):
     length_of_array = len(arr)
@@ -30,11 +36,12 @@ def insertion_sort_descending(arr):
 
     return arr
 
-    
+   
 
 
 test = [5, 3, 2, 6]
 print(insertion_sort(test))
+print(insertion_sort_recursive(test, 0, 3))
 print(insertion_sort_descending(test))
 
 
