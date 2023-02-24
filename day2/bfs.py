@@ -27,7 +27,6 @@ def solve(s):
     while q:
         node = q.pop(0)
         neighbours = g[node]
-        print(node, neighbours)
         for neighbour in neighbours:
             if not visited[neighbour]:
                 q.append(neighbour)

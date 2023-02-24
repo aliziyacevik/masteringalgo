@@ -17,7 +17,7 @@ g= {
         12: (),
                 }
 
-visited = [false for _ in range(n)]
+visited = [False for _ in range(n)]
 
 def dfs(s):
     if visited[s]: return
@@ -27,3 +27,5 @@ def dfs(s):
     for neighbour in neighbours:
         dfs(neighbour)
 
+dfs(0)
+print(visited)
