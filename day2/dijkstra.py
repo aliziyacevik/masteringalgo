@@ -1,8 +1,8 @@
 import sys
+from queue import PriorityQueue
 
 maxim = sys.maxsize
 
-dist = [0, maxim, maxim, maxim, maxim]
 
 vertices = [0, 1 ,2, 3, 4]
 
@@ -31,35 +31,26 @@ graph = {
              1:  {3: 1},
              2:  {1: 2, 3: 5},
              3:  {4: 3},
-             4:  {}
+             4:  {},
 
         }
 
+n = len(vertices)
+dist = [maxim for _ in range(n)]
+dist[0] = 0
 visited = [False for _ in range(len(vertices))]
 
-def all_visited():
-    for vertex in visited:
-        if not vertex:
-            return False
-    return True
+pq = PriorityQueue()
 
-def get_mini(edges):
-    mini = maxim
-    mini_index = -1
-    for node, weight in edges.items():
-        if dist[node] < mini:
-            mini = dist[node]
-            mini_index = node
-    return mini_index
-
+pq.put((dist[0], 0))
 def dijkstra():
-    current  = 0
-    while not all_visited():
-        edge = graph[current]    
-        for neighbour, weight in edge.items():
-            dist[neighbour] = min(dist[neighbour], dist[current] + weight)
-        
+    while not pq.empty():                                                   # 
+        current = pq.get()[1]                           
+        neighbours = graph[current]
+        for vertex, weight in neighbours.items():                           # v*(v - 1)
+            if not visited[vertex]:
+                dist[vertex] = min(dist[vertex], dist[current] + weight)
+                pq.put((dist[vertex], vertex))
         visited[current] = True
-        current = get_mini(edge)
 dijkstra() 
 print(dist)
