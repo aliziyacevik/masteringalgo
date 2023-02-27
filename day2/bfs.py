@@ -1,4 +1,4 @@
-
+from queue import SimpleQueue
 
 n = 13
 g = {   0: (9, 7, 11),
@@ -17,22 +17,21 @@ g = {   0: (9, 7, 11),
                         }
 
 def solve(s, e):
-    q = []
-    q.append(s)
+    q = SimpleQueue()
+    q.put(s)
 
     visited = [False for _ in range(n)]
     visited[s] = True
 
     prev = [None for _ in range(n)]
-    while q:
-        node = q.pop(0)
+    while not q.empty():
+        node = q.get()
         neighbours = g[node]
         for neighbour in neighbours:
             if not visited[neighbour]:
-                q.append(neighbour)
+                q.put(neighbour)
                 visited[neighbour] = True
                 prev[neighbour] = node
-            print(2)
             if neighbour == e:
                 return prev
     return prev
@@ -58,4 +57,4 @@ def bfs(s, e):
     
     return reconstruct_path(s, e, prev)
    
-print(bfs(0, 6))
+print(bfs(0, 12))
