@@ -37,20 +37,21 @@ graph = {
 
 n = len(vertices)
 dist = [maxim for _ in range(n)]
-dist[0] = 0
-visited = [False for _ in range(len(vertices))]
+start = 0
+dist[start] = 0
 
 pq = PriorityQueue()
+
+for i in range(1, n):
+    pq.put((maxim, i))
 
 pq.put((dist[0], 0))
 def dijkstra():
     while not pq.empty():                                                   # 
         current = pq.get()[1]                           
         neighbours = graph[current]
-        for vertex, weight in neighbours.items():                           # v*(v - 1)
-            if not visited[vertex]:
-                dist[vertex] = min(dist[vertex], dist[current] + weight)
-                pq.put((dist[vertex], vertex))
-        visited[current] = True
+        for vertex, weight in neighbours.items():                           
+            dist[vertex] = min(dist[vertex], dist[current] + weight)
+            pq.put((dist[vertex], vertex))
 dijkstra() 
 print(dist)

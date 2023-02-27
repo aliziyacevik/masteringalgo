@@ -16,7 +16,7 @@ g = {   0: (9, 7, 11),
         12: (2, 8),
                         }
 
-def solve(s):
+def solve(s, e):
     q = []
     q.append(s)
 
@@ -32,7 +32,9 @@ def solve(s):
                 q.append(neighbour)
                 visited[neighbour] = True
                 prev[neighbour] = node
-
+            print(2)
+            if neighbour == e:
+                return prev
     return prev
 
 
@@ -52,7 +54,7 @@ def reconstruct_path(s, e, prev):
 
 def bfs(s, e):
     
-    prev = solve(s)
+    prev = solve(s, e)
     
     return reconstruct_path(s, e, prev)
    
